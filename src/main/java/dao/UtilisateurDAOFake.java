@@ -17,6 +17,8 @@ public class UtilisateurDAOFake implements UtilisateurDAO {
 	}
 
 	public boolean exists(String nom, String mail, String mdp) {
+		if(nom.equals("as") && mail.equals("as@as.as") && 
+			mdp.equals("as"))
 		for(Utilisateur u : listeSpectateur) {
 			if(mail.equals(u.getMail())) {
 				return true;
@@ -98,10 +100,18 @@ public class UtilisateurDAOFake implements UtilisateurDAO {
 
 	public String connexion(String nom, String mail, String mdp) {
 		Utilisateur u = connexion2(nom, mail, mdp);
-		if(u == null) return "ErrorConnexion";
-		if(u instanceof As) return "as.html";
+
+		if(u == null) {
+			System.out.println("ERREURCO");
+			return "ErrorConnexion";
+		}
+		if(u instanceof As) {
+			System.out.println("AS");
+			return "as.html";
+		}
 		if(u instanceof Gs) return "gs.html?mail="+u.getMail();
 		if(u instanceof Df) return "df.html?mail="+u.getMail();
+		System.out.println("SPEC");
 		return "spectateur.html?mail="+u.getMail();
 	}
 

@@ -39,6 +39,8 @@ function callInscriptionSpec(result){
 	$("#resultInscriptionSpec").append(html);
 }
 
+
+
 $(function(){
 	$("#inscriptionSpec").click(function(){
 		name = document.getElementById("name").value;
@@ -68,14 +70,26 @@ $(function(){
 			+name+"/"+mail+"/"+mdp,callInscriptionSpec);
 	});
 });
+function callConnexion(result){
+	var templateExample = _.template($('#templateExample').html());
+
+	var html = templateExample({
+		"attribute":JSON.stringify(result)
+	});
+
+	if(result!="errorConnexion") {
+		Location.replace(result);
+	}
+	$("#resultInscriptionSpec").append(html);
+}
 
 $(function(){
 	$("#connexion").click(function(){
 		name = document.getElementById("name").value;
 		mail = document.getElementById("mail").value;
 		mdp = document.getElementById("mdp").value;
-		putTextServerData("ws/utilisateur/df/"
-			+name+"/"+mail+"/"+mdp,callInscriptionSpec);
+		putTextServerData("ws/connexion/"
+			+name+"/"+mail+"/"+mdp,callConnexion);
 	});
 });
 // function callGetFilm(result){

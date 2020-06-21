@@ -60,7 +60,22 @@ public class UtilisateurRessource {
 		return utilisateurDao.getListeAValider();
 	}
 
-	
+	@GET
+	@Path("/connexion/{nom}/{mail}/{mdp}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String connexion(@PathParam("nom") String name,
+		@PathParam("mail") String mail,@PathParam("mdp") String mdp) {
+		String u = utilisateurDao.connexion(name,mail,mdp);
+		if(u.equals("ErrorConnexion")) {
+			return null;
+		}
+		else {
+			return u;
+		}
+	}
+
+
+
  	
 
 }
